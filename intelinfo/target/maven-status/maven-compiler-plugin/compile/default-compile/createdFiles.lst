@@ -1,1 +1,6 @@
+com\onetech\intelinfo\model\Document.class
+com\onetech\intelinfo\service\EmployeeDaoImpl.class
+com\onetech\intelinfo\service\EmployeeDao.class
+com\onetech\intelinfo\model\Employee.class
 com\onetech\intelinfo\controller\MainController.class
+com\onetech\intelinfo\controller\FileController.class

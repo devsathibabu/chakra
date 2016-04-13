@@ -10,10 +10,11 @@ pageEncoding="ISO-8859-1"%>
 <body>
  
 	<center>
-		<h2>Hello World</h2>
-		<h3>
-			 <a href="<%= request.getContextPath() %>/welcome">Click Here</a> 
-		</h3>
+		<form action="myfileupload" method="post">
+		
+		<input type="submit" value="submit">
+		</form>
+		
 	</center>
 </body>
 </html>
