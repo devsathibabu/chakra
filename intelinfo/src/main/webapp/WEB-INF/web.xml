@@ -4,6 +4,9 @@
 	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
 	<display-name>IntelInfo</display-name>
+	  <welcome-file-list>
+		<welcome-file>welcome.jsp</welcome-file>
+	</welcome-file-list>  
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
