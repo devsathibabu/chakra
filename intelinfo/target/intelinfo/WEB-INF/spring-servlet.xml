@@ -39,7 +39,7 @@
 		<property name="password" value="onetech"></property>
 	</bean>
 	
-	<bean id="mysessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">  
+	<!-- <bean id="mysessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">  
         <property name="dataSource" ref="dataSource"></property>  
         <property name="packagesToScan">
         	<list>
@@ -51,7 +51,7 @@
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>  
                 <prop key="hibernate.hbm2ddl.auto">update</prop>  
                 <prop key="hibernate.show_sql">true</prop>  
-                <!-- <prop key="hibernate.setAutoCommit">false</prop> -->
+                <prop key="hibernate.setAutoCommit">false</prop>
                   
             </props>  
         </property>  
@@ -59,6 +59,6 @@
     
     <bean id="dao" class="com.onetech.intelinfo.service.EmployeeDaoImpl">  
    	  <property name="sessionFactory" ref="mysessionFactory"></property>  
-    </bean>
+    </bean> -->
 	
 </beans>
