@@ -1,6 +1,5 @@
   var myApp = angular.module('myApp', []);
 
-
      myApp.directive('fileModel', ['$parse', function ($parse) {
             return {
                restrict: 'A',
@@ -37,7 +36,6 @@
             }  
 
          }]);
-
 
   
     myApp.controller('myCtrl', ['$scope', 'multipartForm', function($scope, multipartForm){
