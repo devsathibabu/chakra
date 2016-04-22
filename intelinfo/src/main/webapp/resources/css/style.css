@@ -1,0 +1,107 @@
+@import url("http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900");
+
+body,html {
+	height: 100%;
+	padding:0px;
+	margin:0px;
+	background-color: #dfc8ca;
+}
+
+.roboto {
+    font-family: "Roboto";
+}
+
+.fw-400 { 
+	font-weight: 400; 
+}
+
+.container{
+    text-align: center;
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+#child{
+	display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#label1{
+	margin-left:-35%;
+	color:#000;
+	font-weight:normal;
+	font-size:12px;
+}
+
+.lists{
+	color:#000;
+	font-weight:normal;
+	font-size: 15px;
+	border-radius: 5px 5px 5px 5px ;
+	height:40px;
+	width:600px;
+}
+
+#label2{
+    display:inline;
+    color:#000;
+    margin-left:1%;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+	cursor: pointer;   
+}
+
+a:link{
+	text-decoration: none;
+}
+
+a:hover {
+   color:#000;
+}
+
+a:visited{
+    color:#000;
+}
+
+a{
+	font-weight: bold;
+	color:#000;
+}
+
+.test + .tooltip > .tooltip-inner {
+    background-color: rgba(0,0,0,0.3); 
+    color: #fff; 
+    border: 1px;
+    padding: 10px;
+    font-size: 12px;
+    opacity: 0.8;
+    margin-left:5px;
+    margin-bottom:40px;
+  }
+
+.test + .tooltip.right > .tooltip-arrow {
+    border-right: 5px solid black;
+    opacity:0.5;
+    margin-left:5px;
+    margin-bottom:10px;  
+}
+
+#myfile{
+	color:red;
+	font-weight: normal;
+}
+
+
+

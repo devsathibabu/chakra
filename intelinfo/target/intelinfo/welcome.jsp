@@ -2,7 +2,7 @@
 <body>
 
 	<div>
-		<form method="POST" enctype="multipart/form-data" action="myfileupload">
+		<form method="POST" enctype="multipart/form-data" action="uploads">
 			<table>
 				<tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
 				<tr><td>Name:</td><td><input type="text" name="name" /></td></tr>
