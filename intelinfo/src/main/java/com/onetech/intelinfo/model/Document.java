@@ -1,15 +1,13 @@
 package com.onetech.intelinfo.model;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class Document {
-	private MultipartFile file;
+	private String name;
 
-	public MultipartFile getFile() {
-		return file;
+	public String getName() {
+		return name;
 	}
 
-	public void setFile(MultipartFile file) {
-		this.file = file;
+	public void setName(String name) {
+		this.name = name;
 	}
 }
