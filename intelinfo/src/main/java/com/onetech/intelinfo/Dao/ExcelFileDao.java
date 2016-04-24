@@ -14,6 +14,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.tools.ant.taskdefs.Mkdir;
 import org.bson.Document;
 
 import com.mongodb.DBObject;
@@ -74,7 +75,7 @@ public class ExcelFileDao {
 	
 	
 	
-	public void fromDBToExcel() throws InterruptedException, Exception{
+	public File fromDBToExcel() throws InterruptedException, Exception{
 		//File file = new File("C:\\Users\\admin\\Desktop\\Building materias.xls");
 		MongoClient client = new MongoClient();
 		MongoDatabase database = client.getDatabase("NODATA");
@@ -163,10 +164,25 @@ public class ExcelFileDao {
 				}
 			}
 		}
+		
+		String parentPath = System.getProperty("catalina.home");
+		String pathToFileDirectory = parentPath+File.separator+"tmpFiles";
+		File tempFiles = new File(pathToFileDirectory);
+		
+		if(!tempFiles.exists()){
+			if(!tempFiles.mkdir()){
+				System.out.println("Directory created successfully");
+			}
+			else{
+				System.out.println("Failed to create Directory");
+			}
+		}
+		
+		File excelFileToDownload = new File(pathToFileDirectory+File.separator+"Excecl.xls");
 
 		FileOutputStream writeToExcel = null;
 		try {
-			writeToExcel = new FileOutputStream(new File("C:/Users/admin/Desktop/Excel.xls"));
+			writeToExcel = new FileOutputStream(excelFileToDownload);
 			newWorkBook.write(writeToExcel);
 			System.out.println("file cereated. check with file path");
 		} catch (Exception e) {
@@ -175,5 +191,7 @@ public class ExcelFileDao {
 			writeToExcel.close();
 			newWorkBook.close();
 		}
+		
+		return excelFileToDownload;
 	}
 }

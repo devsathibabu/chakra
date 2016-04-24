@@ -27,8 +27,11 @@ public class FileParserService {
 		workbook.close();
 	}
 	
-	public void fromDbTOExcel() throws Exception{
-		excelFileDao.fromDBToExcel();
+	public File fromDbTOExcel() throws Exception{
+		File file = null;
+		
+		file = excelFileDao.fromDBToExcel();
+		return file;
 	}
 
 }
