@@ -58,7 +58,7 @@ var myApp= angular.module('App',[]);
                     console.log("inside submit");
 				    var file = $scope.myFile;
 				    console.log('file is ' + JSON.stringify(file));
-				    var uploadUrl = "http://192.168.1.153:8080/intelinfo/uploads.htm";
+				    var uploadUrl = "http://127.0.0.1:8080/intelinfo/uploads.htm";
 				    fileUpload.uploadFileToUrl(uploadUrl, file);
 			    }
 			}
@@ -97,7 +97,7 @@ var myApp= angular.module('App',[]);
     	$scope.download=function(){
 	            var category=$scope.inputlist;
     		    console.log(category);
-    		    var downloadUrl="http://192.168.1.153:8080/intelinfo/download.htm";
+    		    var downloadUrl="http://127.0.0.1:8080/intelinfo/download.htm";
     		    fileDownload.downloadFilefromUrl(downloadUrl,category);
     	};    		
     }]);
@@ -110,6 +110,10 @@ var myApp= angular.module('App',[]);
 		    var fd = new FormData();
 		    fd.append('category', category);
 		    $http.post(templateUrl, fd, {
+				    transformRequest : angular.identity,
+				    headers : {
+					'Content-Type' : undefined
+				    }
 			}).success(function() {
 			    console.log("success balle balle");
 		    }).error(function() {
@@ -125,11 +129,11 @@ var myApp= angular.module('App',[]);
             $scope.categories = data;
         });
     	
-    	$scope.templateDownload=function(){
+    	$scope.tempDownload=function(){	
     		
     	        var category=$scope.inputlist;
     	    	console.log(category);
-    		    var templateUrl="http://192.168.1.153:8080/intelinfo/template.htm";
+    		    var templateUrl="http://127.0.0.1:8080/intelinfo/template.htm";
     		    templateDownload.downloadtemplatefromUrl(templateUrl,category);
     	};
 

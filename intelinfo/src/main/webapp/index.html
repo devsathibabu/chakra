@@ -16,7 +16,7 @@
                         <option id="oplist" ng-repeat="category in categories" value="{{category.id}}"></option>
                     </datalist><br/><br/></br><br/>
                 <a href="" ng-click ="download()" class="test" id="test" data-toggle="tooltip" data-placement="auto right" title="You can download excel file from here.Choose a category and click link!">Import document</a>&nbsp;&nbsp;&nbsp;<br/><br/>
-                <a ng-controller="templateCtrl" href="" ng-click ="templateDownload()" class="test" id="test1" data-toggle="tooltip" data-placement="auto right" title="Download excel template from here.Choose a category and continue!.">Import document template</a>
+                <a ng-controller="templateCtrl" href="" ng-click ="tempDownload()" class="test" id="test1" data-toggle="tooltip" data-placement="auto right" title="Download excel template from here.Choose a category and continue!.">Import document template</a>
             </div><br/>
             <div>
 				<input  type="file" name="file-4" file-model="myFile" id="file-4" class="inputfile"  multiple />

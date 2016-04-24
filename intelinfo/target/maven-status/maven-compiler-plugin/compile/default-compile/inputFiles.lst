@@ -1,5 +1,2 @@
-D:\workspace\intelinfo\src\main\java\com\onetech\intelinfo\Dao\ExcelFileDao.java
-D:\workspace\intelinfo\src\main\java\com\onetech\intelinfo\model\Document.java
-D:\workspace\intelinfo\src\main\java\com\onetech\intelinfo\controller\MainController.java
-D:\workspace\intelinfo\src\main\java\com\onetech\intelinfo\controller\FileController.java
-D:\workspace\intelinfo\src\main\java\com\onetech\intelinfo\service\FileParserService.java
+D:\projects\intelinfo\src\main\java\com\onetech\intelinfo\controller\FileDownload.java
+D:\projects\intelinfo\src\main\java\com\onetech\intelinfo\controller\FileController.java
