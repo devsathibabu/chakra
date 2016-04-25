@@ -29,6 +29,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mongodb.DB;
+import com.mongodb.MongoClient;
+import com.mongodb.gridfs.GridFS;
+import com.mongodb.gridfs.GridFSDBFile;
+
 @Controller
 public class FileDownload {
 
@@ -39,73 +44,27 @@ public class FileDownload {
 		
 		System.out.println(fileName);
 		
-		String rootDirectory = System.getProperty("catalina.home");
-		String pathToFile = rootDirectory+File.separator+"templateFiles";
-		
-		File directory = new File(pathToFile);
-		
-		//File file = new File("D:/Biotechnology1.xls");
-		//String name = request.getParameter("templateName");
-		//System.out.println(name);
-		
-		FilenameFilter fileNameFilter = new FilenameFilter() {
-			
-			public boolean accept(File dir, String name) {
-				return name.startsWith(fileName);
-			}
-		};
-		
-		String[] childern = directory.list(fileNameFilter);
-		String realFileName = null;
-		
-		if(childern == null){
-			System.out.println("File Not Found in Directory");
-		}else{
-			for(int i=0;i < childern.length;i++){
-				realFileName = childern[i];
-				System.out.println(i);
-				System.out.println(realFileName);
-			}
+		MongoClient mongoClient = new MongoClient();
+		DB mongoDB = mongoClient.getDB("Template");
+		GridFS gridfs = new GridFS(mongoDB);
+		GridFSDBFile grisFsdownloadFile = null;
+		try {
+		 grisFsdownloadFile = gridfs.findOne(fileName+".xlsx");
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
-		File downloadFile = new File(realFileName);
-		System.out.println("the file is"+downloadFile.getName());
-		System.out.println("the file path is "+downloadFile.getAbsolutePath());
-		
-		
-		boolean isFileInServer = downloadFile.exists();
-		System.out.println("Status of file"+isFileInServer);
-		
-		if(!downloadFile.exists()){
-			String errorMessage = "Sorry. The file you are looking for does not exist";
-			System.out.println(errorMessage);
-			OutputStream outputStream = response.getOutputStream();
-			outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
-			outputStream.close();
-			return;
-		}
-		
-		String mimeType= URLConnection.guessContentTypeFromName(downloadFile.getName());
-		if(mimeType==null){
-			System.out.println("mimetype is not detectable, will take default");
-			mimeType = "application/octet-stream";
-		}
-		
-		System.out.println("mimetype : "+mimeType);
-		
+		response.setHeader("Content-Disposition", String.format("attachment; filename=\"" + grisFsdownloadFile.getFilename() +"\""));
+
+        String mimeType = "application/octet-stream";
         response.setContentType(mimeType);
         
-        /* "Content-Disposition : inline" will show viewable types [like images/text/pdf/anything viewable by browser] right on browser 
-            while others(zip e.g) will be directly downloaded [may provide save as popup, based on your browser setting.]*/
-        response.setHeader("Content-Disposition", String.format("attachment; filename=\"" + downloadFile.getName() +"\""));
-
-        
         /* "Content-Disposition : attachment" will be directly download, may provide save as popup, based on your browser setting*/
-        //response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
+        response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", grisFsdownloadFile.getFilename()));
         
-        response.setContentLength((int)downloadFile.length());
+        response.setContentLength((int)grisFsdownloadFile.getLength());
 
-		InputStream inputStream = new BufferedInputStream(new FileInputStream(downloadFile));
+		InputStream inputStream = grisFsdownloadFile.getInputStream();
 
         //Copy bytes from source to destination(outputstream in this example), closes both streams.
         FileCopyUtils.copy(inputStream, response.getOutputStream());

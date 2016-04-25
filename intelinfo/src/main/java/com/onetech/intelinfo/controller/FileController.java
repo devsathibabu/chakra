@@ -38,16 +38,16 @@ public class FileController {
 	public @ResponseBody void handleFileUpload(
 			@RequestParam(value="file", required=true) MultipartFile file) throws Exception{
 
-		BufferedOutputStream outStream = null;
-		byte[] fileBytes = file.getBytes();
+		//BufferedOutputStream outStream = null;
+		//byte[] fileBytes = file.getBytes();
 		System.out.println(file.getOriginalFilename());
-		String rootpath = System.getProperty("catalina.home");
+		/*String rootpath = System.getProperty("catalina.home");
 		File dir = new File(rootpath +File.separator + "tmpFiles");
 		if(!dir.exists()){
 			dir.mkdirs();
 		}
 		System.out.println(dir);
-		File serrverFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
+		File serrverFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename().trim());
 		try {
 			outStream = new BufferedOutputStream(new FileOutputStream(serrverFile));
 			outStream.write(fileBytes);
@@ -55,8 +55,8 @@ public class FileController {
 			e.printStackTrace();
 		}
 		outStream.close();
-		System.out.println(serrverFile);
-		fileParserService.parseExcelFile(serrverFile);
+		System.out.println(serrverFile);*/
+		fileParserService.parseExcelFile(file);
 
 	}
 
@@ -66,7 +66,7 @@ public class FileController {
 		System.out.println("In download controller");
 		System.out.println(name);
 		File file = null;
-		file = fileParserService.fromDbTOExcel();
+		file = fileParserService.fromDbTOExcel(name);
 		
 		
 		if(!file.exists()){

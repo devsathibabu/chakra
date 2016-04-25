@@ -30,7 +30,7 @@ public class ExcelFileDao {
 		HSSFRow row;
 		MongoClient mongoClient = new MongoClient();
 		MongoDatabase mongoDatabase = mongoClient.getDatabase("NODATA");
-		MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("Biotechnology1.xls");
+		MongoCollection<Document> mongoCollection = mongoDatabase.getCollection(fileName);
 		Document document = null;
 		
 		String key = null;
@@ -75,8 +75,7 @@ public class ExcelFileDao {
 	
 	
 	
-	public File fromDBToExcel() throws InterruptedException, Exception{
-		//File file = new File("C:\\Users\\admin\\Desktop\\Building materias.xls");
+	public File fromDBToExcel(String categoryName) throws InterruptedException, Exception{
 		MongoClient client = new MongoClient();
 		MongoDatabase database = client.getDatabase("NODATA");
 		if(database != null){
@@ -84,7 +83,7 @@ public class ExcelFileDao {
 		}else{
 			System.out.println("Failed to create database");
 		}
-		MongoCollection<Document> collection = database.getCollection("Biotechnology1.xls");
+		MongoCollection<Document> collection = database.getCollection(categoryName);
 		if(collection == null){
 			System.out.println("Record Not found");
 		}else{
@@ -178,7 +177,8 @@ public class ExcelFileDao {
 			}
 		}
 		
-		File excelFileToDownload = new File(pathToFileDirectory+File.separator+"Excecl.xls");
+		File excelFileToDownload = new File(pathToFileDirectory+File.separator+categoryName+".xls");
+		System.out.println(excelFileToDownload.getName());
 
 		FileOutputStream writeToExcel = null;
 		try {
@@ -188,10 +188,10 @@ public class ExcelFileDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
+			client.close();
 			writeToExcel.close();
 			newWorkBook.close();
 		}
-		
 		return excelFileToDownload;
 	}
 }
